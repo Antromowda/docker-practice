@@ -1,5 +1,5 @@
 # Image the container will be built from
-FROM node:16.15.0-alpine
+FROM node:16-alpine
 
 # Container work directory
 WORKDIR /app

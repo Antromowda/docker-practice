@@ -1,0 +1,39 @@
+version: '3'
+
+volumes:
+  base:
+    driver: local
+  postgres:
+    driver: local
+
+
+
+services:
+  base: &base
+    hostname: base
+    image: node:16-alpine
+    volumes:
+      - base:/home/node/app
+    tty: true
+    environment:
+      EXPRESS_PORT: 4000
+
+  db:
+    hostname: db
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: pg
+      POSTGRES_PASSWORD: nimbus@2000
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres
+
+  app:
+    <<: *base
+    hostname: app
+    command: yarn dev
+    ports:
+      - 4000:4000
+    depends_on:
+      - db

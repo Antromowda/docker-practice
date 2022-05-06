@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
   ]);
 });
 
-app.listen(4000, () => {
-  console.log('listening for requests on port 4000');
+const PORT = process.env.EXPRESS_PORT || 4000
+app.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
 });
